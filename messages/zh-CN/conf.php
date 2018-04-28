@@ -39,7 +39,7 @@ return [
     'releases tip' => '代码发布的版本库，每次发布更新webroot的软链到当前最新版本',
     'keep version tip' => '过多的历史版本将被删除，只可回滚保留的版本',
     'servers tip' => '要发布的机器列表，一行一个，非22端口可 ip:port',
-    'task help' => '使用系统变量更方便处理路径问题：{WORKSPACE}：宿主机的独立部署空间或目标机的webroot    {VERSION}：发布的版本库的当前版本',
+    'task help' => '使用系统变量更方便处理路径问题：{WORKSPACE}：宿主机的独立部署空间或目标机的webroot    {VERSION}：发布的版本库的当前版本   {BRANCH}: 当前任务所使用的分支或标签名',
     'task help head' => '辅助变量',
     'pre_deploy tip' => '在部署代码之前的准备工作，如git的一些前置检查、vendor的安装（更新），一行一条',
     'post_deploy tip' => 'git代码检出之后，可能做一些调整处理，如vendor拷贝，环境适配（mv config-test.php config.php），一行一条',
