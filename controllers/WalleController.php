@@ -451,7 +451,7 @@ class WalleController extends Controller
     private function _preDeploy()
     {
         $sTime = Command::getMs();
-        $ret = $this->walleTask->preDeploy($this->task->link_id);
+        $ret = $this->walleTask->preDeploy($this->task->link_id, $this->task);
         // 记录执行时间
         $duration = Command::getMs() - $sTime;
         Record::saveRecord($this->walleTask, $this->task->id, Record::ACTION_PRE_DEPLOY, $duration);
@@ -474,7 +474,7 @@ class WalleController extends Controller
     private function _postDeploy()
     {
         $sTime = Command::getMs();
-        $ret = $this->walleTask->postDeploy($this->task->link_id);
+        $ret = $this->walleTask->postDeploy($this->task->link_id, $this->task);
         // 记录执行时间
         $duration = Command::getMs() - $sTime;
         Record::saveRecord($this->walleTask, $this->task->id, Record::ACTION_POST_DEPLOY, $duration);

@@ -18,7 +18,7 @@ class Task extends Ansible {
      *
      * @return bool
      */
-    public function preDeploy($version) {
+    public function preDeploy($version, $task) {
         $tasks = GlobalHelper::str2arr($this->getConfig()->pre_deploy);
         if (empty($tasks)) return true;
 
@@ -27,9 +27,11 @@ class Task extends Ansible {
         $workspace = rtrim(Project::getDeployWorkspace($version), '/');
         $pattern = [
             '#{WORKSPACE}#',
+            '#{BRANCH}#'
         ];
         $replace = [
             $workspace,
+            $task->branch
         ];
 
         // 简化用户切换目录，直接切换到当前部署空间：{deploy_from}/{env}/{project}-YYmmdd-HHiiss
@@ -47,7 +49,7 @@ class Task extends Ansible {
      *
      * @return bool
      */
-    public function postDeploy($version) {
+    public function postDeploy($version, $task) {
         $tasks = GlobalHelper::str2arr($this->getConfig()->post_deploy);
         if (empty($tasks)) return true;
 
@@ -56,9 +58,11 @@ class Task extends Ansible {
         $workspace = rtrim(Project::getDeployWorkspace($version), '/');
         $pattern = [
             '#{WORKSPACE}#',
+            '#{BRANCH}#'
         ];
         $replace = [
             $workspace,
+            $task->branch
         ];
 
         // 简化用户切换目录，直接切换到当前部署空间：{deploy_from}/{env}/{project}-YYmmdd-HHiiss
@@ -109,10 +113,12 @@ class Task extends Ansible {
         $pattern = [
             '#{WORKSPACE}#',
             '#{VERSION}#',
+            '#{BRANCH}#'
         ];
         $replace = [
             $workspace,
             $version,
+            $task->branch
         ];
 
         // 简化用户切换目录，直接切换到当前的版本目录：{release_library}/{project}/{version}
