@@ -487,7 +487,7 @@ class WalleController extends Controller {
     private function _updateRemoteServers($version, $delay = 0) {
         $cmd = [];
         // pre-release task
-        if (($preRelease = WalleTask::getRemoteTaskCommand($this->conf->pre_release, $version))) {
+        if (($preRelease = WalleTask::getRemoteTaskCommand($this->conf->pre_release, $version, $this->task))) {
             $cmd[] = $preRelease;
         }
         // link
@@ -495,7 +495,7 @@ class WalleController extends Controller {
             $cmd[] = $linkCmd;
         }
         // post-release task
-        if (($postRelease = WalleTask::getRemoteTaskCommand($this->conf->post_release, $version))) {
+        if (($postRelease = WalleTask::getRemoteTaskCommand($this->conf->post_release, $version, $this->task))) {
             $cmd[] = $postRelease;
         }
 
